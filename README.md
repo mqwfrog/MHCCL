@@ -39,7 +39,6 @@ python main.py \
 --batch_size 128 \
 --mlp --cos \ 
 --layers 3 \
---pcl_r 4 \
 --posi 2 \
 --negi 100 \
 --posp 3 \
