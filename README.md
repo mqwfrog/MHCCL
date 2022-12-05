@@ -1,6 +1,19 @@
 
 ### MHCCL: Masked Hierarchical Cluster-wise Contrastive Learning for Multivariate Time Series - A PyTorch Version
+Authors: Qianwen Meng, Hangwei Qian, Yong Liu, Yonghui Xu, Zhiqi Shen, Lizhen Cui
+This work is accepted for publication in Proceedings of the 37th AAAI Conference on Artificial Intelligence (AAAI 2023).
 
+### Citation:
+If you find any of the codes helpful, kindly cite our paper.
+
+@misc{meng2022mhccl,
+    title={MHCCL: Masked Hierarchical Cluster-wise Contrastive Learning for Multivariate Time Series},
+    author={Qianwen Meng and Hangwei Qian and Yong Liu and Yonghui Xu and Zhiqi Shen and Lizhen Cui},
+    year={2022},
+    eprint={2212.01141},
+    archivePrefix={arXiv},
+    primaryClass={cs.LG}
+}
 
 ### Requirements for this project:
 - Python ≥ 3.6
@@ -70,6 +83,24 @@ python classifier.py \
 - If you choose different partitions or masking strategies, the suffix will be added automatically such as
   "experiment_{args.dataset_name}_{args.mask_mode}_layer0_{args.dist_threshold}" 
 
+
+
+### References:
+Part of the augmentation transformation functions are adapted from
+
+https://github.com/emadeldeen24/TS-TCC
+https://github.com/terryum/Data-Augmentation-For-Wearable-Sensor-Data
+https://github.com/LijieFan/AdvCL/blob/main/fr_util.py
+
+Part of the contrastive models are adapted from
+
+https://github.com/salesforce/PCL
+https://github.com/lucidrains/byol-pytorch
+https://github.com/lightly-ai/lightly
+https://github.com/emadeldeen24/TS-TCC
+
+Loggers used in the repo are adapted from
+https://github.com/emadeldeen24/TS-TCC
 
 
 
