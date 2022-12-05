@@ -29,7 +29,7 @@ Learning semantic-rich representations from raw unlabeled time series data is cr
 - PyTorch ≥ 1.4
 
 
-## Packages that need to be installed:
+## Required Packages:
 - numpy
 - sklearn
 - openpyxl 
