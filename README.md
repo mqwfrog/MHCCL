@@ -16,7 +16,11 @@ If you find any of the codes helpful, kindly cite our paper.
 }  
 
 ## MHCCL Overview:
-![image](http)
+![image](https://github.com/mqwfrog/MHCCL/blob/main/MHCCL_overview.png)
+
+  
+## Abstract
+Learning semantic-rich representations from raw unlabeled time series data is critical for downstream tasks such as classification and forecasting. Contrastive learning has recently shown its promising representation learning capability in the absence of expert annotations. However, existing contrastive approaches generally treat each instance independently, which leads to false negative pairs that share the same semantics. To tackle this problem, we propose MHCCL, a Masked Hierarchical Cluster-wise Contrastive Learning model, which exploits semantic information obtained from the hierarchical structure consisting of multiple latent partitions for multivariate time series. Motivated by the observation that fine-grained clustering preserves higher purity while coarse-grained one reflects higher-level semantics, we propose a novel downward masking strategy to filter out fake negatives and supplement positives by incorporating the multi-granularity information from the clustering hierarchy. In addition, a novel upward masking strategy is designed in MHCCL to remove outliers of clusters at each partition to refine prototypes, which helps speed up the hierarchical clustering process and improves the clustering quality. We conduct experimental evaluations on seven widely-used multivariate time series datasets. The results demonstrate the superiority of MHCCL over the state-of-the-art approaches for unsupervised time series representation learning.  
 
 
 ## Requirements for this project:
@@ -90,21 +94,10 @@ python classifier.py \
 
 
 ## References:
-Part of the augmentation transformation functions are adapted from
+Part of the codes are referenced from. 
 
 https://github.com/emadeldeen24/TS-TCC
-https://github.com/terryum/Data-Augmentation-For-Wearable-Sensor-Data
-https://github.com/LijieFan/AdvCL/blob/main/fr_util.py
-
-Part of the contrastive models are adapted from
-
 https://github.com/salesforce/PCL
-https://github.com/lucidrains/byol-pytorch
-https://github.com/lightly-ai/lightly
-https://github.com/emadeldeen24/TS-TCC
-
-Loggers used in the repo are adapted from
-https://github.com/emadeldeen24/TS-TCC
 
 
 
