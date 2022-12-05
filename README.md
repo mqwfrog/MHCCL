@@ -1,26 +1,30 @@
 
-### MHCCL: Masked Hierarchical Cluster-wise Contrastive Learning for Multivariate Time Series - A PyTorch Version
-Authors: Qianwen Meng, Hangwei Qian, Yong Liu, Yonghui Xu, Zhiqi Shen, Lizhen Cui\
-This work is accepted for publication in Proceedings of the 37th AAAI Conference on Artificial Intelligence (AAAI 2023).
+# MHCCL: Masked Hierarchical Cluster-wise Contrastive Learning for Multivariate Time Series - a PyTorch Version  
+Authors: Qianwen Meng, Hangwei Qian, Yong Liu, Yonghui Xu, Zhiqi Shen, Lizhen Cui  
+This work is accepted for publication in Proceedings of the 37th AAAI Conference on Artificial Intelligence (AAAI 2023).  
 
-### Citation:
-If you find any of the codes helpful, kindly cite our paper.
+## Citation:
+If you find any of the codes helpful, kindly cite our paper.   
 
-@misc{meng2022mhccl,
-    title={MHCCL: Masked Hierarchical Cluster-wise Contrastive Learning for Multivariate Time Series},
-    author={Qianwen Meng and Hangwei Qian and Yong Liu and Yonghui Xu and Zhiqi Shen and Lizhen Cui},
-    year={2022},
-    eprint={2212.01141},
-    archivePrefix={arXiv},
-    primaryClass={cs.LG}
-}
+@misc{meng2022mhccl,  
+    title={MHCCL: Masked Hierarchical Cluster-wise Contrastive Learning for Multivariate Time Series},  
+    author={Qianwen Meng and Hangwei Qian and Yong Liu and Yonghui Xu and Zhiqi Shen and Lizhen Cui},  
+    year={2022},  
+    eprint={2212.01141},  
+    archivePrefix={arXiv},  
+    primaryClass={cs.LG}  
+}  
 
-### Requirements for this project:
+## MHCCL Overview:
+![image](http)
+
+
+## Requirements for this project:
 - Python ≥ 3.6
 - PyTorch ≥ 1.4
 
 
-### Packages that need to be installed:
+## Packages that need to be installed:
 - numpy
 - sklearn
 - openpyxl 
@@ -44,7 +48,7 @@ If you find any of the codes helpful, kindly cite our paper.
 - tensorboard_logger 
 
 
-### To perform unsupervised representation learning, use the following options:
+## To perform unsupervised representation learning, please refer to the options below:
 <pre>
 python main.py \
 --dataset_name wisdm \
@@ -67,7 +71,7 @@ python main.py \
 </pre>
 
 
-### To perform downstream classification task based on the learned representations, use the following options:
+## To perform downstream classification task based on the learned representations, please refer to the options below:
 <pre>
 python classifier.py \
 --dataset_name wisdm \
@@ -78,14 +82,14 @@ python classifier.py \
 </pre>
 
 
-### Results:
+## Results:
 - The experimental results will be saved in "experiment_{args.dataset_name}" directory by default 
 - If you choose different partitions or masking strategies, the suffix will be added automatically such as
   "experiment_{args.dataset_name}_{args.mask_mode}_layer0_{args.dist_threshold}" 
 
 
 
-### References:
+## References:
 Part of the augmentation transformation functions are adapted from
 
 https://github.com/emadeldeen24/TS-TCC
