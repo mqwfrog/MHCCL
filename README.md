@@ -94,10 +94,12 @@ python classifier.py \
 
 
 ## References:
-Part of the codes are referenced from. 
+Part of the codes are referenced from  
 
-https://github.com/emadeldeen24/TS-TCC
-https://github.com/salesforce/PCL
+https://github.com/emadeldeen24/TS-TCC  
+https://github.com/salesforce/PCL  
+https://github.com/mqwfrog/FINCH-Clustering  
+
 
 
 
