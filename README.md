@@ -4,18 +4,6 @@ Authors: Qianwen Meng, Hangwei Qian, Yong Liu, Yonghui Xu, Zhiqi Shen, Lizhen Cu
 This work is accepted for publication in Proceedings of the 37th AAAI Conference on Artificial Intelligence (AAAI 2023).  
 
 
-## Citation:
-If you find any of the codes helpful, kindly cite our paper.   
-
-@misc{meng2022mhccl,  
-    title={MHCCL: Masked Hierarchical Cluster-wise Contrastive Learning for Multivariate Time Series},  
-    author={Qianwen Meng and Hangwei Qian and Yong Liu and Yonghui Xu and Zhiqi Shen and Lizhen Cui},  
-    year={2022},  
-    eprint={2212.01141},  
-    archivePrefix={arXiv},  
-    primaryClass={cs.LG}  
-}  
-
 ## MHCCL Overview:
 ![image](https://github.com/mqwfrog/MHCCL/blob/main/MHCCL_overview.png)
 
@@ -92,6 +80,18 @@ python classifier.py \
 - If you choose different partitions or masking strategies, the suffix will be added automatically such as
   "experiment_{args.dataset_name}_{args.mask_mode}_layer0_{args.dist_threshold}" 
 
+
+## Citation:
+If you find any of the codes helpful, kindly cite our paper.   
+
+@misc{meng2022mhccl,  
+    title={MHCCL: Masked Hierarchical Cluster-wise Contrastive Learning for Multivariate Time Series},  
+    author={Qianwen Meng and Hangwei Qian and Yong Liu and Yonghui Xu and Zhiqi Shen and Lizhen Cui},  
+    year={2022},  
+    eprint={2212.01141},  
+    archivePrefix={arXiv},  
+    primaryClass={cs.LG}  
+}  
 
 
 ## References:
