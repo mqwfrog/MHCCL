@@ -4,11 +4,15 @@ import re
 import torch
 import numpy as np
 import pandas as pd
+import pickle
+import scipy
+import scipy.interpolate
+import pathlib
+import typing
+import errno
 from pathlib import Path
 from typing import Optional, Union, List, Tuple
 from sklearn.model_selection import train_test_split
-from data_preprocessing.core import split_using_target, split_using_sliding_window
-from data_preprocessing.base import BaseDataset, check_path
 
 __all__ = ['WISDM', 'load', 'load_raw']
 
@@ -17,6 +21,11 @@ SUBJECTS = tuple(range(1, 36+1))
 ACTIVITIES = tuple(['Walking', 'Jogging', 'Sitting', 'Standing', 'Upstairs', 'Downstairs'])
 Sampling_Rate = 20 # Hz
 
+class BaseDataset(object):
+    def __init__(self, path: Path):
+        self.path = path
+    def load(self, *args):
+        raise NotImplementedError
 
 class WISDM(BaseDataset):
     def __init__(self, path:Path):
@@ -52,13 +61,106 @@ class WISDM(BaseDataset):
 
         return x_frames, y_frames
 
+def check_path(path: Union[Path, str]) -> Path:
+    if isinstance(path, str):
+        path = Path(path)
+    elif not isinstance(path, Path):
+        raise TypeError('expected type of "path" is Path or str, but {}'.format(type(path)))
+    if not path.exists():
+        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), str(path))
+    return path
+
+def to_frames_using_reshape(src: np.ndarray, window_size: int) -> np.ndarray:
+    num_frames = (src.shape[0] - window_size) // window_size + 1
+    ret = src[:(num_frames * window_size)]
+    return ret.reshape(-1, window_size, *src.shape[1:])
+
+def to_frames(src: np.ndarray, window_size: int, stride: int, stride_mode: str = 'index') -> np.ndarray:
+    assert stride > 0, 'stride={}'.format(stride)
+    assert stride_mode in ['index', 'nptrick'], "stride_mode is 'index' or 'nptrick'. stride_mode={}".format(
+        stride_mode)
+    if stride == window_size:
+        return to_frames_using_reshape(src, window_size)
+    elif stride_mode == 'index':
+        return to_frames_using_index(src, window_size, stride)
+    else:
+        return to_frames_using_nptricks(src, window_size, stride)
+
+def to_frames_using_index(src: np.ndarray, window_size: int, stride: int) -> np.ndarray:
+    assert stride > 0, 'stride={}'.format(stride)
+    num_frames = (len(src) - window_size) // stride + 1
+    idx = np.arange(window_size).reshape(-1, window_size).repeat(num_frames, axis=0) + np.arange(
+        num_frames).reshape(num_frames, 1) * stride
+    return src[idx]
+
+def to_frames_using_nptricks(src: np.ndarray, window_size: int, stride: int) -> np.ndarray:
+
+    assert stride > 0, 'stride={}'.format(stride)
+    num_frames = (src.shape[0] - window_size) // stride + 1
+    ret_shape = (num_frames, window_size, *src.shape[1:])
+    strides = (stride * src.strides[0], *src.strides)
+    return np.lib.stride_tricks.as_strided(src, shape=ret_shape, strides=strides)
+
+def split_using_sliding_window(segment: np.ndarray, **options) -> np.ndarray:
+    assert len(segment.shape) == 2, "Segment's shape is (segment_size, ch). This segment shape is {}".format(
+        segment.shape)
+    window_size = options.pop('window_size', 512)
+    stride = options.pop('stride', None)
+    ftrim = options.pop('ftrim', 5)
+    btrim = options.pop('btrim', 5)
+    return_error_value = options.pop('return_error_value', None)
+    assert not bool(options), "args error: key {} is not exist.".format(list(options.keys()))
+    assert type(window_size) is int, "type(window_size) is int: {}".format(type(window_size))
+    assert ftrim >= 0 and btrim >= 0, "ftrim >= 0 and btrim >= 0: ftrim={}, btrim={}".format(ftrim, btrim)
+    if type(segment) is not np.ndarray:
+        return return_error_value
+    if len(segment) < ftrim + btrim:
+        return return_error_value
+    if btrim == 0:
+        seg = segment[ftrim:].copy()
+    else:
+        seg = segment[ftrim: -btrim].copy()
+    if len(seg) < window_size:
+        return return_error_value
+    if stride is None:
+        stride = window_size
+    return to_frames(seg, window_size, stride, stride_mode='index')
+
+def split_using_target(src: np.ndarray, target: np.ndarray) -> typing.Dict[int, typing.List[np.ndarray]]:
+    from collections import defaultdict
+    rshifted = np.roll(target, 1)
+    diff = target - rshifted
+    diff[0] = 1
+    idxes = np.where(diff != 0)[0]
+
+    ret = defaultdict(list)
+    for i in range(1, len(idxes)):
+        ret[target[idxes[i - 1]]].append(src[idxes[i - 1]:idxes[i]].copy())
+    ret[target[idxes[-1]]].append(src[idxes[-1]:].copy())
+    return dict(ret)
+
+def interpolate(src: np.ndarray, rate: int, kind: str = 'linear', axis: int = -1) -> np.ndarray:
+    N = src.shape[axis]
+    x_low = np.linspace(0, 1, N)
+    x_target = np.linspace(0, 1, N + (N - 1) * (rate - 1))
+    f = scipy.interpolate.interp1d(x_low, src, kind=kind, axis=axis)
+    return f(x_target)
+
+def pickle_dump(obj: typing.Any, path: typing.Union[str, pathlib.Path]) -> None:
+    with open(path, mode='wb') as f:
+        pickle.dump(obj, f)
+    return
+
+def pickle_load(path: pathlib.Path) -> typing.Any:
+    with open(path, mode='rb') as f:
+        data = pickle.load(f)
+    return data
 
 def load(path:Union[Path,str]) -> Tuple[List[pd.DataFrame], List[pd.DataFrame]]:
     path = check_path(path)
     raw = load_raw(path)
     data, meta = reformat(raw)
     return data, meta
-
 
 def load_raw(path:Path) -> pd.DataFrame:
     path = path / 'WISDM_ar_v1.1_raw.txt'
