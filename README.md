@@ -102,7 +102,7 @@ Part of the codes are referenced from
 
 https://github.com/emadeldeen24/TS-TCC  
 https://github.com/salesforce/PCL  
-https://github.com/mqwfrog/FINCH-Clustering  
+https://github.com/ssarfraz/FINCH-Clustering
 
 
 
