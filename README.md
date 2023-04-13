@@ -5,7 +5,7 @@ This work is accepted for publication in Proceedings of the 37th AAAI Conference
 
 
 ## MHCCL Overview:
-![image](https://github.com/mqwfrog/MHCCL/blob/main/MHCCL_overview_new.png)
+![image](https://github.com/mqwfrog/MHCCL/blob/main/mhccl.png)
 
   
 ## Abstract
