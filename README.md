@@ -80,13 +80,11 @@ python classifier.py \
 - If you choose different partitions or masking strategies, the suffix will be added automatically such as
   "experiment_{args.dataset_name}_{args.mask_mode}_layer0_{args.dist_threshold}" 
 
-## Visualization:
-Figures to be updated soon...
-
 
 ## Citation:
 If you find any of the codes helpful, kindly cite our paper.   
 
+<pre>
 @inproceedings{DBLP:conf/aaai/MengQLCX023,
   author       = {Qianwen Meng and
                   Hangwei Qian and
@@ -101,7 +99,7 @@ If you find any of the codes helpful, kindly cite our paper.
   publisher    = {{AAAI} Press},
   year         = {2023}
 }
-
+</pre>
 
 ## References:
 Part of the codes are referenced from  
