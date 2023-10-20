@@ -87,14 +87,20 @@ Figures to be updated soon...
 ## Citation:
 If you find any of the codes helpful, kindly cite our paper.   
 
-@misc{meng2022mhccl,  
-    title={MHCCL: Masked Hierarchical Cluster-wise Contrastive Learning for Multivariate Time Series},  
-    author={Qianwen Meng and Hangwei Qian and Yong Liu and Yonghui Xu and Zhiqi Shen and Lizhen Cui},  
-    year={2022},  
-    eprint={2212.01141},  
-    archivePrefix={arXiv},  
-    primaryClass={cs.LG}  
-}  
+@inproceedings{DBLP:conf/aaai/MengQLCX023,
+  author       = {Qianwen Meng and
+                  Hangwei Qian and
+                  Yong Liu and
+                  Lizhen Cui and
+                  Yonghui Xu and
+                  Zhiqi Shen},
+  title        = {{MHCCL:} Masked Hierarchical Cluster-Wise Contrastive Learning for
+                  Multivariate Time Series},
+  booktitle    = {{AAAI}},
+  pages        = {9153--9161},
+  publisher    = {{AAAI} Press},
+  year         = {2023}
+}
 
 
 ## References:
