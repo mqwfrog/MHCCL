@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 import torch
 from sklearn.preprocessing import MinMaxScaler
 
-data = pd.read_csv("data.csv")
+data = pd.read_csv("epilepsy_srcdata.csv")
 output_dir ="../data/epilepsy"
 
 y = data.iloc[:, -1]
