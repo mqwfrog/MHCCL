@@ -1,5 +1,5 @@
 
-# MHCCL: Masked Hierarchical Cluster-wise Contrastive Learning for Multivariate Time Series - a PyTorch Version [[Paper]](https://arxiv.org/abs/2212.01141) [[Code]](https://github.com/mqwfrog/MHCCL)
+# MHCCL: Masked Hierarchical Cluster-wise Contrastive Learning for Multivariate Time Series - a PyTorch Version [[Paper]](https://ojs.aaai.org/index.php/AAAI/article/view/26098) [[Code]](https://github.com/mqwfrog/MHCCL)
 Authors: Qianwen Meng, Hangwei Qian, Yong Liu, Lizhen Cui, Yonghui Xu, Zhiqi Shen  
 This work is accepted for publication in Proceedings of the 37th AAAI Conference on Artificial Intelligence (AAAI 2023).  
 
